@@ -5,47 +5,27 @@
     ============================================================
     SportHub Arena - Login Page
     ============================================================
-    Referensi Utama:
-    [1] T. A. Felke-Morris, Web Development And Design Foundations
-        With HTML5, 10th Edition, Pearson, 2019.
-        - Bab 2: HTML Basics (struktur dokumen, elemen semantik)
-        - Bab 8: Forms (elemen form, input, label, button)
-        - Bab 11: Web Accessibility (atribut aria, for/id)
-        - Bab 14: Responsive Design (media queries)
-        - Bab 15-16: JavaScript Basics & Form Validation
-
-    Referensi Pendukung:
-    [2] Responsive Web Design With Bootstrap, Edisi 1, Andi, 2016.
-        - Konsep layout responsif & media query
-
-    [3] Mozilla Developer Network, "JavaScript Guide," 2023.
-        https://developer.mozilla.org/en-US/docs/Web/JavaScript/
-        - Event Listeners, DOM Manipulation, Form Validation
-
-    [4] W3Schools HTML Reference
-        https://www.w3schools.com/html/
-    ============================================================
 -->
 
 <head>
-    <!-- Meta charset & viewport wajib - Felke-Morris Bab 2 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Login ke akun SportHub Arena Anda">
     <title>SportHub Arena - Login</title>
 
-    <!-- External CSS - Prinsip separation of concerns [1] Bab 3 -->
+
+    <!-- External CSS - Prinsip separation of concerns Bab 3 -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <!--
-        CSS Internal - Felke-Morris Bab 3
+        CSS Internal
         Khusus halaman login, menggunakan CSS Variables dari :root style.css
     -->
     <style>
         /* ============================================
-           AUTH PAGE LAYOUT - Felke-Morris Bab 4 (CSS Layout)
+           AUTH PAGE LAYOUT
         ============================================ */
         .auth-page {
             min-height: 100vh;
@@ -207,7 +187,7 @@
         }
 
         /* ============================================
-           FORM ELEMENTS - Felke-Morris Bab 8
+           FORM ELEMENTS
         ============================================ */
         .auth-form-group {
             margin-bottom: 20px;
@@ -260,7 +240,7 @@
             color: var(--hijau);
         }
 
-        /* Input HTML5 - Felke-Morris Bab 8 */
+        /* Input HTML5*/
         .auth-input {
             width: 100%;
             padding: 14px 16px 14px 44px;
@@ -321,7 +301,7 @@
             margin-bottom: 24px;
         }
 
-        /* Checkbox "Ingat Saya" - Felke-Morris Bab 8 */
+        /* Checkbox "Ingat Saya"*/
         .remember-label {
             display: flex;
             align-items: center;
@@ -495,8 +475,7 @@
         }
 
         /* ============================================
-           RESPONSIVE - Felke-Morris Bab 14
-           [2] Responsive Web Design
+           RESPONSIVE
         ============================================ */
         @media (max-width: 1024px) {
             .auth-page {
@@ -542,7 +521,6 @@
 
     <!-- =====================================================
          NAVBAR - Elemen <nav> HTML5 Semantik
-         Referensi: Felke-Morris Bab 2 (Semantic HTML)
     ===================================================== -->
     <nav class="navbar" aria-label="Navigasi Utama">
         <div class="nav-brand">
@@ -581,7 +559,6 @@
 
     <!-- =====================================================
          MAIN - Elemen <main> HTML5 Semantik
-         Referensi: Felke-Morris Bab 2
     ===================================================== -->
     <main>
         <div class="auth-page">
@@ -589,7 +566,6 @@
             <!-- ===========================================
                  SISI KIRI: HERO / BRANDING
                  Elemen <aside> untuk konten pelengkap
-                 Referensi: Felke-Morris Bab 2
             =========================================== -->
             <aside class="auth-hero" aria-hidden="true">
                 <div class="auth-hero-content">
@@ -631,7 +607,6 @@
             <!-- ===========================================
                  SISI KANAN: FORM LOGIN
                  Elemen <section> untuk konten utama
-                 Referensi: Felke-Morris Bab 2
             =========================================== -->
             <section class="auth-form-side">
                 <div class="auth-form-container">
@@ -645,7 +620,7 @@
                         <p>Masukkan email dan password Anda<br>untuk melanjutkan</p>
                     </div>
 
-                    <!-- Alert notifikasi - ditampilkan via JavaScript MDN [3] -->
+                    <!-- Alert notifikasi - ditampilkan via JavaScript -->
                     <div class="auth-alert auth-alert-success" id="alertSuccess" role="alert" aria-live="polite">
                         <i class="fas fa-check-circle"></i>
                         <span id="alertSuccessMsg"></span>
@@ -657,7 +632,6 @@
 
                     <!-- =======================================
                          FORM LOGIN
-                         Referensi: Felke-Morris Bab 8 (Forms)
                          Atribut: action, method, novalidate
                          Elemen: label (for), input (id/name/type),
                                  button (type="submit")
@@ -669,12 +643,12 @@
                         novalidate
                         aria-label="Form Login">
 
-                        <!-- Input Email - Felke-Morris Bab 8 -->
+                        <!-- Input Email -->
                         <div class="auth-form-group">
                             <!--
                                 Atribut for="loginEmail" harus cocok
                                 dengan id="loginEmail" pada <input>
-                                Wajib untuk aksesibilitas - Felke-Morris Bab 11
+                                Wajib untuk aksesibilitas
                             -->
                             <label for="loginEmail">
                                 Email
@@ -701,14 +675,14 @@
                                     aria-describedby="emailError">
                             </div>
 
-                            <!-- Pesan error validasi - MDN ARIA [3] -->
+                            <!-- Pesan error validasi -->
                             <p class="field-error-msg" id="emailError" role="alert">
                                 <i class="fas fa-exclamation-circle"></i>
                                 <span>Format email tidak valid.</span>
                             </p>
                         </div>
 
-                        <!-- Input Password - Felke-Morris Bab 8 -->
+                        <!-- Input Password -->
                         <div class="auth-form-group">
                             <label for="loginPassword">
                                 Password
@@ -736,7 +710,6 @@
                                 <!--
                                     type="button" agar tidak submit form
                                     onclick memanggil fungsi JS
-                                    Referensi: Felke-Morris Bab 15
                                 -->
                                 <button
                                     type="button"
@@ -757,7 +730,7 @@
                         <!-- Checkbox Ingat Saya + Lupa Password -->
                         <div class="auth-extras">
                             <!--
-                                input type="checkbox" - Felke-Morris Bab 8
+                                input type="checkbox"
                                 for/id menghubungkan label ke checkbox
                             -->
                             <label class="remember-label" for="rememberMe">
@@ -773,7 +746,7 @@
                             </a>
                         </div>
 
-                        <!-- Tombol Submit - Felke-Morris Bab 8 -->
+                        <!-- Tombol Submit -->
                         <button
                             type="submit"
                             class="btn-login"
@@ -821,12 +794,10 @@
     <!-- =====================================================
          JAVASCRIPT
          Ditempatkan sebelum </body> agar DOM sudah termuat
-         Referensi: Felke-Morris Bab 15 & 16
-                    MDN JavaScript Guide [3]
 
          Prinsip yang diterapkan:
          1. Separation of concerns (JS di bawah body)
-         2. addEventListener (MDN Event API) [3]
+         2. addEventListener
          3. DOM Manipulation via getElementById, classList
          4. Form Validation API
          5. Fungsi modular (satu fungsi, satu tugas)
@@ -837,9 +808,6 @@
          * ================================================
          * login.js - SportHub Arena Authentication
          *
-         * Referensi:
-         * [1] Felke-Morris, Bab 15-16: JavaScript for Web
-         * [3] MDN JavaScript Guide, Mozilla, 2023.
          *     https://developer.mozilla.org/en-US/docs/Web/JavaScript/
          * ================================================
          */
@@ -848,7 +816,6 @@
          * DATA AKUN DEMO
          * Dalam proyek nyata, validasi dilakukan di server (back-end).
          * Untuk keperluan demo/UTS front-end, akun disimpan di sini.
-         * Referensi: MDN - Objects & Arrays [3]
          */
         var DEMO_ACCOUNTS = [
             { email: "admin@sporthub.com",  password: "admin123",  name: "Admin" },
@@ -857,8 +824,7 @@
         ];
 
         /*
-         * REFERENSI ELEMEN DOM
-         * Felke-Morris Bab 15: document.getElementById()
+         * AMBIL ELEMEN DOM
          * Mengambil referensi sekali untuk efisiensi
          */
         var loginForm     = document.getElementById("loginForm");
@@ -871,13 +837,10 @@
 
         /*
          * EVENT LISTENER FORM SUBMIT
-         * Felke-Morris Bab 16: Handling Form Events
-         * MDN: EventTarget.addEventListener() [3]
          */
         loginForm.addEventListener("submit", function(event) {
             /*
              * event.preventDefault() mencegah browser reload halaman
-             * Referensi: MDN - Event.preventDefault() [3]
              */
             event.preventDefault();
 
@@ -895,8 +858,6 @@
 
         /*
          * FUNGSI VALIDASI FORM
-         * Referensi: Felke-Morris Bab 16 (Client-side Validation)
-         *            MDN - RegExp [3]
          *
          * @param {string} email    - Nilai input email
          * @param {string} password - Nilai input password
@@ -928,7 +889,6 @@
 
         /*
          * VALIDASI FORMAT EMAIL DENGAN REGEX
-         * Referensi: MDN - Regular Expressions [3]
          *
          * @param {string} email - String yang akan divalidasi
          * @returns {boolean}    - true jika format email valid
@@ -941,7 +901,6 @@
 
         /*
          * PROSES LOGIN (SIMULASI AJAX)
-         * Referensi: MDN - setTimeout [3], Array.find [3]
          *
          * @param {string} email    - Email yang diinput
          * @param {string} password - Password yang diinput
@@ -951,12 +910,10 @@
 
             /*
              * setTimeout mensimulasikan jeda request ke server
-             * Referensi: MDN - WindowOrWorkerGlobalScope.setTimeout [3]
              */
             setTimeout(function() {
                 /*
                  * Array.find() mencari akun yang cocok
-                 * Referensi: MDN - Array.prototype.find() [3]
                  */
                 var foundAccount = DEMO_ACCOUNTS.find(function(account) {
                     return account.email.toLowerCase() === email.toLowerCase()
@@ -976,7 +933,6 @@
 
         /*
          * CALLBACK: LOGIN BERHASIL
-         * Referensi: MDN - sessionStorage [3], window.location [3]
          *
          * @param {Object} account - Objek akun yang berhasil login
          */
@@ -986,7 +942,6 @@
 
             /*
              * Simpan data sesi user ke sessionStorage
-             * Referensi: MDN - Web Storage API [3]
              */
             try {
                 sessionStorage.setItem("userName", account.name);
@@ -998,7 +953,6 @@
 
             /*
              * Arahkan ke halaman home setelah 1.5 detik
-             * Referensi: MDN - Location.href [3]
              */
             setTimeout(function() {
                 window.location.href = "home.html";
@@ -1017,7 +971,6 @@
 
         /*
          * TOGGLE TAMPILKAN/SEMBUNYIKAN PASSWORD
-         * Referensi: MDN - Element.type, classList [3]
          * Dipanggil via atribut onclick pada <button>
          */
         function togglePasswordVisibility() {
@@ -1036,7 +989,6 @@
 
         /*
          * TAMPILKAN ERROR PADA FIELD
-         * Referensi: MDN - classList, querySelector [3]
          *
          * @param {string} errorId - ID elemen pesan error
          * @param {string} message - Teks pesan error
@@ -1058,7 +1010,6 @@
 
         /*
          * BERSIHKAN SEMUA ERROR
-         * Referensi: MDN - classList.remove [3]
          */
         function clearAllErrors() {
             document.getElementById("alertSuccess").classList.remove("show-alert");
@@ -1083,13 +1034,12 @@
             msgEl.textContent = message;
             alertEl.classList.add("show-alert");
 
-            /* scrollIntoView agar alert terlihat - MDN [3] */
+            /* scrollIntoView agar alert terlihat oleh pengguna */
             alertEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
 
         /*
          * STATE LOADING TOMBOL SUBMIT
-         * Referensi: MDN - HTMLButtonElement.disabled [3]
          *
          * @param {boolean} isLoading - true untuk aktifkan loading
          */
@@ -1124,7 +1074,6 @@
         /*
          * VALIDASI REAL-TIME (oninput)
          * Membersihkan error saat user mulai mengetik ulang
-         * Referensi: MDN - InputEvent [3]
          */
         emailInput.addEventListener("input", function() {
             if (emailInput.classList.contains("input-error")) {
@@ -1143,7 +1092,6 @@
         /*
          * FOCUS / BLUR IKON STYLING
          * Mengubah warna ikon saat input aktif
-         * Referensi: MDN - FocusEvent [3]
          */
         emailInput.addEventListener("focus", function() {
             document.getElementById("wrapEmail").classList.add("is-focused");
@@ -1163,7 +1111,6 @@
     <!--
         Script ditempatkan sebelum </body> agar semua
         elemen DOM sudah ada sebelum script berjalan
-        Referensi: Felke-Morris Bab 15
     -->
 
 </body>
