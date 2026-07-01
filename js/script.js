@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-//Dark mode
+//Dark Mode
 function toggleDark() {
     document.body.classList.toggle('dark');
 
@@ -122,6 +122,7 @@ window.addEventListener('scroll', function () {
     }
 });
 
+//Reservasi
 function formatReservationDate(dateStr) {
     if (!dateStr) return '-';
     const date = new Date(dateStr);
@@ -318,10 +319,18 @@ function loadNavUserName() {
         });
     }
 
+<<<<<<< HEAD
     //pencarian lapangN
     function searchField(query) {
         if (query.length > 0) {
             window.location.href = 'fields.html?search=' + encodeURIComponent(query);
+=======
+        //pencarian lapangan
+        function searchField(query) {
+            if (query.length > 0) {
+                window.location.href = 'fields.html?search=' + encodeURIComponent(query);
+            }
+>>>>>>> 3e7e4cc50699a7dbf7b85b65dab5a387154780d4
         }
     }
 
@@ -677,6 +686,7 @@ function loadNavUserName() {
         totalPrice: 0
     };
 
+<<<<<<< HEAD
     let currentStep = 1;
 
     //navigasi
@@ -689,6 +699,49 @@ function loadNavUserName() {
                 if (!booking.date) { alert('Pilih tanggal terlebih dahulu!'); return; }
                 if (!booking.timeSlot) { alert('Pilih slot waktu terlebih dahulu!'); return; }
             }
+=======
+        //navigasi
+        function markStepDone(step) {
+            const indicator = document.getElementById('step-indicator-' + step);
+            indicator.classList.add('done');
+            const circle = indicator.querySelector('.step-circle');
+            if (circle) circle.innerHTML = '';
+        }
+
+        function goToStep(step) {
+            // Validasi sebelum lanjut
+            if (step > currentStep) {
+                if (currentStep === 1 && !booking.sport) { alert('Pilih olahraga terlebih dahulu!'); return; }
+                if (currentStep === 2 && !booking.fieldId) { alert('Pilih lapangan terlebih dahulu!'); return; }
+                if (currentStep === 3) {
+                    if (!booking.date) { alert('Pilih tanggal terlebih dahulu!'); return; }
+                    if (!booking.timeSlot) { alert('Pilih slot waktu terlebih dahulu!'); return; }
+                }
+            }
+
+            // Sembunyikan step aktif
+            document.getElementById('booking-step-' + currentStep).classList.remove('active');
+            document.getElementById('step-indicator-' + currentStep).classList.remove('active');
+
+            // Tandai step selesai
+            if (step > currentStep) {
+                markStepDone(currentStep);
+            }
+
+            currentStep = step;
+
+            // Tampilkan step baru
+            document.getElementById('booking-step-' + currentStep).classList.add('active');
+            document.getElementById('step-indicator-' + currentStep).classList.add('active');
+
+            // Render konten step khusus
+            if (step === 2) renderFieldOptions();
+            if (step === 4) renderReview();
+            if (step === 5) renderPaymentTotal();
+
+            // Scroll ke atas
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+>>>>>>> 3e7e4cc50699a7dbf7b85b65dab5a387154780d4
         }
 
         // Sembunyikan step aktif
@@ -905,9 +958,95 @@ function loadNavUserName() {
             document.getElementById('step-indicator-' + i).classList.add('done');
         }
 
+<<<<<<< HEAD
         // Render detail sukses
         const detail = document.getElementById('success-detail');
         detail.innerHTML = `
+=======
+        // ======== Step 5: Pembayaran ========
+        function renderPaymentTotal() {
+            document.getElementById('payment-total').textContent = 'Rp ' + booking.totalPrice.toLocaleString('id-ID');
+        }
+
+        function selectPayment(method, el) {
+            booking.paymentMethod = method;
+
+            document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+
+            document.getElementById('btn-confirm').removeAttribute('disabled');
+        }
+
+        //konfrim booking
+        function confirmBooking() {
+            // Jika metode pembayaran QRIS, tampilkan QR code dulu untuk dipindai user
+            if (booking.paymentMethod === 'qris') {
+                showQrisModal();
+                return;
+            }
+
+            processBooking();
+        }
+
+        // ======== QRIS: Tampilkan QR Code untuk pembayaran ========
+        function showQrisModal() {
+            const amount = booking.totalPrice || 0;
+            const qrisId = 'SH' + Date.now();
+            booking._qrisPendingId = qrisId;
+
+            // Data yang di-encode ke dalam QR (simulasi payload QRIS)
+            const qrData = `SPORTHUB-QRIS|ID:${qrisId}|AMOUNT:${amount}|SPORT:${booking.sport || '-'}|FIELD:${booking.fieldName || '-'}`;
+
+            // Generate gambar QR via API publik (tanpa perlu library tambahan)
+            const qrImageUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(qrData);
+
+            document.getElementById('qrisImage').src = qrImageUrl;
+            document.getElementById('qrisAmount').textContent = 'Rp ' + amount.toLocaleString('id-ID');
+            document.getElementById('qrisBookingId').textContent = 'Ref: ' + qrisId;
+
+            const overlay = document.getElementById('qrisModalOverlay');
+            overlay.style.display = 'flex';
+        }
+
+        function closeQrisModal() {
+            document.getElementById('qrisModalOverlay').style.display = 'none';
+        }
+
+        function confirmQrisPayment() {
+            closeQrisModal();
+            processBooking();
+        }
+
+        // Proses booking asli (dipisah agar bisa dipanggil setelah scan QRIS ataupun metode lain)
+        function processBooking() {
+            // Simpan ke localStorage
+            const reservations = JSON.parse(localStorage.getItem('sporthub_reservations') || '[]');
+            const user = JSON.parse(localStorage.getItem('sporthub_login') || '{}');
+
+            const newBooking = {
+                id: 'SH' + Date.now(),
+                user: user.name || 'Guest',
+                ...booking,
+                createdAt: new Date().toISOString()
+            };
+
+            reservations.push(newBooking);
+            localStorage.setItem('sporthub_reservations', JSON.stringify(reservations));
+
+            // Tampilkan success
+            document.querySelectorAll('.booking-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('booking-success').classList.add('active');
+
+            // Update progress semua step done
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('step-indicator-' + i).classList.remove('active');
+                markStepDone(i);
+            }
+
+            // Render detail sukses
+            const detail = document.getElementById('success-detail');
+            detail.innerHTML = `
+>>>>>>> 3e7e4cc50699a7dbf7b85b65dab5a387154780d4
                 <div class="review-item"><span>ID Booking</span><strong>${newBooking.id}</strong></div>
                 <div class="review-item"><span>Lapangan</span><strong>${booking.fieldName}</strong></div>
                 <div class="review-item"><span>Tanggal</span><strong>${formatDate(booking.date)}</strong></div>
@@ -970,6 +1109,7 @@ function loadNavUserName() {
         renderReservationTable();
     });
 
+<<<<<<< HEAD
     window.setHarga = setHarga;
     window.applyPromo = applyPromo;
     window.applypromo = applyPromo;
@@ -982,6 +1122,25 @@ function loadNavUserName() {
     window.confirmBooking = confirmBooking;
     window.toggleUserMenu = toggleUserMenu;
     window.logout = logout;
+=======
+window.setHarga = setHarga;
+window.applyPromo = applyPromo;
+window.applypromo = applyPromo;
+window.hitungTotal = hitungTotal;
+window.goToStep = goToStep;
+window.markStepDone = markStepDone;
+window.selectSport = selectSport;
+window.selectField = selectField;
+window.updateTimeSlots = updateTimeSlots;
+window.selectPayment = selectPayment;
+window.confirmBooking = confirmBooking;
+window.showQrisModal = showQrisModal;
+window.closeQrisModal = closeQrisModal;
+window.confirmQrisPayment = confirmQrisPayment;
+window.processBooking = processBooking;
+window.toggleUserMenu = toggleUserMenu;
+window.logout = logout;
+>>>>>>> 3e7e4cc50699a7dbf7b85b65dab5a387154780d4
 })();
 
 //loginpage
