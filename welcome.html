@@ -44,9 +44,14 @@
                 <a href="home.html#promo">Promo</a>
             </div>
             <div class="nav-actions">
+                <button id="musicBtn" class="btn-dark-toggle" title="Music">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+
                 <button class="btn-dark-toggle" onclick="toggleDark()" title="Toggle Dark Mode">
                     <i class="fas fa-moon" id="dark-icon"></i>
                 </button>
+                
                 <a href="login.html" class="btn-signin">Sign In</a>
                 <button class="hamburger" onclick="toggleMenu()" id="hamburger">
                     <i class="fas fa-bars"></i>
@@ -154,6 +159,12 @@
         </button>
         <span class="fab-tooltip">Chat Support</span>
     </div>
+
+    <!-- ===== TAMBAHAN BACKGROUND MUSIC ===== -->
+    <audio id="bgMusic" loop>
+        <source src="sound/welcome.mp3" type="audio/mpeg">
+    </audio>
+    <!-- ===== AKHIR TAMBAHAN ===== -->
 
     <script src="js/script.js"></script>
 </body>
